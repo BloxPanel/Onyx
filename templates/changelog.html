@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OnyxBot Changelog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwind CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white font-sans">
+
+    <!-- Header -->
+    <header class="bg-gray-900 p-4 shadow-md border-b border-gray-800">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">OnyxBot Changelog</h1>
+            <a href="/dashboard" class="text-gray-300 hover:text-white">Dashboard</a>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        {% if commits %}
+            <div class="grid gap-4">
+                {% for c in commits %}
+                <div class="bg-gray-900 p-4 rounded-xl shadow-md border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-2"><strong>{{ c.date[:10] }}</strong></p>
+                    <p class="text-white">{{ c.message }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-500">No commits available at this time.</p>
+        {% endif %}
+    </main>
+
+</body>
+</html>

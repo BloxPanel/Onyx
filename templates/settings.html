@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onyx Bot - Owner Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+<!-- Header -->
+<header class="bg-black/70 p-6 border-b border-gray-800 shadow-lg">
+    <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-purple-400">Onyx Owner Settings</h1>
+        <nav class="space-x-4">
+            <a href="/dashboard" class="hover:text-purple-400 font-semibold">Dashboard</a>
+            <a href="/logout" class="hover:text-red-400 font-semibold">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-6 space-y-10">
+
+    <!-- Global Settings -->
+    <section class="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-purple-500/30 transition">
+        <h2 class="text-2xl font-bold text-purple-300 mb-4">Global Bot Settings</h2>
+        <form id="bot-config-form" class="space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                <label class="w-48 font-semibold">Command Prefix:</label>
+                <input type="text" id="command-prefix" class="flex-1 p-2 rounded-lg text-black">
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="checkbox" id="maintenance-mode" class="h-5 w-5">
+                <label class="font-semibold">Maintenance Mode</label>
+            </div>
+            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                <label class="w-48 font-semibold">Default Alert Channel ID:</label>
+                <input type="text" id="default-alert-channel" class="flex-1 p-2 rounded-lg text-black" placeholder="1234567890">
+            </div>
+            <div class="flex items-center gap-4">
+                <input type="checkbox" id="global-logging" class="h-5 w-5">
+                <label class="font-semibold">Enable Global Logging</label>
+            </div>
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-xl font-semibold shadow">Save Settings</button>
+        </form>
+    </section>
+
+    <!-- Server Management -->
+    <section class="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-purple-500/30 transition">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-purple-300">Servers</h2>
+            <button id="global-sync"
+                class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold shadow transition">
+                🌐 Global Sync
+            </button>
+        </div>
+        <p class="text-gray-400 mb-4">Manage servers connected to Onyx.</p>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-700">
+                        <th class="px-4 py-2">Server Name</th>
+                        <th class="px-4 py-2">Server ID</th>
+                        <th class="px-4 py-2">Users</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="server-list">
+                    <!-- Populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Logs -->
+    <section class="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-purple-500/30 transition">
+        <h2 class="text-2xl font-bold text-purple-300 mb-4">Bot Logs</h2>
+        <pre id="log-container" class="bg-gray-900/70 p-4 rounded-lg max-h-64 overflow-y-auto"></pre>
+    </section>
+
+    <!-- Advanced / Debug Tools -->
+    <section class="bg-gray-800/60 p-6 rounded-2xl shadow-lg hover:shadow-purple-500/30 transition">
+        <h2 class="text-2xl font-bold text-purple-300 mb-4">Advanced / Debug Tools</h2>
+        <form id="debug-form" class="flex flex-col md:flex-row gap-4 items-center">
+            <textarea id="eval-code" placeholder="Python code here" class="flex-1 p-2 rounded-lg text-black h-40 resize-y"></textarea>
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg font-semibold shadow">Run</button>
+        </form>
+        <pre id="eval-output" class="bg-gray-900/70 p-4 rounded-lg mt-4 max-h-64 overflow-y-auto"></pre>
+        <div class="mt-4 flex gap-4">
+            <button id="restart-bot" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-lg font-semibold shadow">Restart Bot</button>
+            <button id="update-bot" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-semibold shadow">Update Bot Code</button>
+        </div>
+    </section>
+
+</main>
+
+<footer class="py-6 text-center bg-black/70 border-t border-gray-800">
+    <p class="text-gray-400">© <span id="year"></span> Onyx Security Bot. Built for safe communities.</p>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    async function loadSettings() {
+        const res = await fetch("/api/owner/settings");
+        const data = await res.json();
+
+        document.getElementById("command-prefix").value = data.command_prefix;
+        document.getElementById("maintenance-mode").checked = data.maintenance_mode;
+        document.getElementById("default-alert-channel").value = data.default_alert_channel;
+        document.getElementById("global-logging").checked = data.global_logging;
+
+        const serverList = document.getElementById("server-list");
+        serverList.innerHTML = "";
+        data.servers.forEach(server => {
+            serverList.innerHTML += `
+                <tr class="border-b border-gray-700 hover:bg-gray-700/50">
+                    <td class="px-4 py-2">${server.name}</td>
+                    <td class="px-4 py-2">${server.id}</td>
+                    <td class="px-4 py-2">${server.user_count}</td>
+                    <td class="px-4 py-2 space-x-2">
+                        <button onclick="syncServer('${server.id}')" class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg font-semibold">Sync</button>
+                        <button onclick="removeBot('${server.id}')" class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-lg font-semibold">Remove</button>
+                    </td>
+                </tr>`;
+        });
+
+        document.getElementById("log-container").innerText = data.logs.join("\n");
+    }
+
+    document.getElementById("bot-config-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const body = {
+            command_prefix: document.getElementById("command-prefix").value,
+            maintenance_mode: document.getElementById("maintenance-mode").checked,
+            default_alert_channel: document.getElementById("default-alert-channel").value,
+            global_logging: document.getElementById("global-logging").checked
+        };
+        await fetch("/api/owner/settings", { 
+            method: "POST", 
+            headers: {"Content-Type":"application/json"}, 
+            body: JSON.stringify(body) 
+        });
+        alert("Global settings saved!");
+    });
+
+    document.getElementById("debug-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const code = document.getElementById("eval-code").value;
+        const res = await fetch("/api/owner/eval", { 
+            method: "POST", 
+            headers: {"Content-Type":"application/json"}, 
+            body: JSON.stringify({code}) 
+        });
+        const data = await res.json();
+        document.getElementById("eval-output").innerText = data.output;
+    });
+
+    document.getElementById("restart-bot").addEventListener("click", async () => {
+        await fetch("/api/owner/restart", { method: "POST" });
+        alert("Bot restart initiated!");
+    });
+
+    document.getElementById("update-bot").addEventListener("click", async () => {
+        await fetch("/api/owner/update", { method: "POST" });
+        alert("Bot update initiated!");
+    });
+
+    async function syncServer(id) {
+        await fetch(`/api/owner/servers/${id}/sync`, { method: "POST" });
+        alert("Server synced!");
+    }
+
+    async function removeBot(id) {
+        await fetch(`/api/owner/servers/${id}/remove`, { method: "POST" });
+        alert("Bot removed from server!");
+        loadSettings();
+    }
+
+    // ✅ Add this new section here
+    document.getElementById("global-sync").addEventListener("click", async () => {
+        if (!confirm("Run a global sync for Onyx? This will refresh all slash commands and reload configs.")) return;
+
+        try {
+            const res = await fetch("/api/owner/global-sync", { method: "POST" });
+            const data = await res.json();
+
+            if (data.status === "success") {
+                alert("✅ Global sync completed successfully!");
+            } else {
+                alert("❌ Sync failed: " + (data.message || "Unknown error"));
+            }
+        } catch (err) {
+            console.error(err);
+            alert("⚠️ Failed to contact backend.");
+        }
+    });
+
+    loadSettings();
+</script>
+</body>
+</html>

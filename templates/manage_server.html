@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage {{ server.name }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-[#111111] via-[#1A1A1A] to-[#111111] text-white font-sans">
+
+    <!-- Sidebar -->
+    <aside class="fixed top-0 left-0 h-full w-64 bg-[#2E1A47] shadow-lg p-6 flex flex-col">
+        <h1 class="text-3xl font-bold mb-10">Onyx</h1>
+        <nav class="flex flex-col gap-4">
+            <a href="/dashboard" class="hover:text-[#6C3BFF]">Dashboard</a>
+            <a href="/changelog" class="hover:text-[#6C3BFF]">Changelog</a>
+            <a href="/settings" class="hover:text-[#6C3BFF]">Settings</a>
+            <a href="/logout" class="hover:text-[#6C3BFF]">Logout</a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-10">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-10">
+            <h2 class="text-2xl font-semibold">Manage Server: {{ server.name }}</h2>
+            <div class="flex items-center gap-4">
+                <img src="https://cdn.discordapp.com/avatars/{{ user.id }}/{{ user.avatar }}.png?size=128" 
+                     alt="User Avatar" 
+                     class="w-10 h-10 rounded-full border-2 border-[#5A2ECF]">
+                <span>{{ user.username }}</span>
+            </div>
+        </header>
+
+        <!-- Server Card -->
+        <div class="bg-[#1F1F1F] rounded-xl shadow-md p-6 flex flex-col items-center">
+            <!-- Server Icon -->
+            <img src="https://cdn.discordapp.com/icons/{{ server.id }}/{{ server.icon }}.png?size=128"
+                 onerror="this.onerror=null; this.src='/static/default-server-icon.png';"
+                 alt="{{ server.name }}"
+                 class="w-24 h-24 rounded-full mb-4 border-2 border-[#5A2ECF]">
+
+            <!-- Server Info -->
+            <h3 class="text-xl font-semibold mb-2">{{ server.name }}</h3>
+            <p class="text-gray-400 mb-6">Server ID: {{ server.id }}</p>
+
+            <!-- Feature Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                
+                <!-- Configure Roles -->
+                <div onclick="window.location.href='/server/{{ server.id }}/roles'"
+                    class="bg-[#2A2A2A] rounded-xl p-6 hover:bg-[#3A2A5F] transition-colors cursor-pointer shadow-md">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="text-2xl">⚙️</span>
+                        <h4 class="text-lg font-semibold">Configure Roles</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">Manage server role hierarchy and assign role permissions.</p>
+                </div>
+
+                <!-- Manage Channels -->
+                <div onclick="window.location.href='/server/{{ server.id }}/channels'"
+                    class="bg-[#2A2A2A] rounded-xl p-6 hover:bg-[#3A2A5F] transition-colors cursor-pointer shadow-md">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="text-2xl">📝</span>
+                        <h4 class="text-lg font-semibold">Manage Channels</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">Add, edit, or delete channels and control their visibility.</p>
+                </div>
+
+                <!-- Permissions -->
+                <div onclick="window.location.href='/server/{{ server.id }}/permissions'"
+                    class="bg-[#2A2A2A] rounded-xl p-6 hover:bg-[#3A2A5F] transition-colors cursor-pointer shadow-md">
+                    <div class="flex items-center gap-4 mb-3">
+                        <span class="text-2xl">🔒</span>
+                        <h4 class="text-lg font-semibold">Permissions</h4>
+                    </div>
+                    <p class="text-gray-400 text-sm">Fine-tune server access and role-based permissions.</p>
+                </div>
+
+            </div>
+
+            <!-- Roles Display Area -->
+            <div id="rolesDisplay" class="mt-6 bg-[#2A2A2A] rounded-xl p-4 w-full text-sm font-mono overflow-x-auto hidden">
+                <h4 class="text-lg font-semibold mb-2">Server Roles</h4>
+                <p id="adminRole">Admin Role ID: </p>
+                <p id="allowedPingRole">Allowed Ping Role ID: </p>
+            </div>
+
+            <!-- Config Display Area -->
+            <div id="configDisplay" class="mt-6 bg-[#2A2A2A] rounded-xl p-4 w-full text-sm font-mono overflow-x-auto hidden">
+                <h4 class="text-lg font-semibold mb-2">Configuration</h4>
+                <pre id="configContent" class="whitespace-pre-wrap"></pre>
+            </div>
+        </div>
+    </main>
+
+<script>
+// Configure Roles
+document.getElementById('configureRoles').addEventListener('click', () => {
+    window.location.href = `/server/{{ server.id }}/roles`;
+});
+
+// Manage Channels
+document.getElementById('manageChannels').addEventListener('click', () => {
+    window.location.href = `/server/{{ server.id }}/channels`;
+});
+
+// Permissions
+document.getElementById('permissions').addEventListener('click', () => {
+    window.location.href = `/server/{{ server.id }}/permissions`;
+});
+</script>
+</body>
+</html>

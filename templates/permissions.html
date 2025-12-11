@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ server.name }} - Permissions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-[#111111] via-[#1A1A1A] to-[#111111] text-white">
+
+    <main class="p-10 ml-64">
+        <h2 class="text-2xl font-semibold mb-6">Permissions for {{ server.name }}</h2>
+        <p>What does this mean? <br> This page is just a list of the permissions that server administrators or the server owner have set as dangerous permissions, meaning anyone who gets these permissions added to them by an unauthorized user will be stripped of every role they have. <br> (It's basically just a security thing)</p>
+        <div class="bg-[#2A2A2A] rounded-xl p-6 shadow-lg">
+            <pre class="text-sm text-gray-300 whitespace-pre-wrap">
+{{ permissions | tojson(indent=2) }}
+            </pre>
+        </div>
+    </main>
+
+</body>
+</html>

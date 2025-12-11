@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | Onyx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="min-h-screen bg-gradient-to-b from-gray-950 via-black to-gray-900 text-white">
+    <!-- Navbar -->
+    <nav class="bg-black/50 border-b border-gray-800 backdrop-blur-md sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-2xl font-extrabold bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">Onyx</a>
+        <div class="space-x-6">
+          <a href="/" class="text-gray-300 hover:text-purple-400 transition">Home</a>
+          <a href="/tos" class="text-gray-300 hover:text-purple-400 transition">Terms</a>
+          <a href="/privacy" class="text-purple-400 font-semibold">Privacy</a>
+          <a href="/login" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl font-semibold shadow">Dashboard</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <section class="max-w-4xl mx-auto px-6 py-16">
+      <h1 class="text-4xl font-extrabold bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent mb-8">
+        Privacy Policy
+      </h1>
+
+      <p class="text-gray-300 mb-6">
+        This Privacy Policy outlines how <span class="text-purple-300 font-semibold">Onyx</span> (“we”, “our”, or “the bot”) collects, stores, and uses data while operating on Discord.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">1. Information We Collect</h2>
+      <p class="text-gray-300 mb-6">
+        Onyx may collect limited information necessary for moderation and functionality within your Discord server, including:
+      </p>
+      <ul class="list-disc pl-8 text-gray-300 mb-6 space-y-1">
+        <li>User IDs</li>
+        <li>Server IDs</li>
+        <li>Channel IDs</li>
+        <li>Message content (only when required for moderation and logging features)</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">2. Data Storage</h2>
+      <p class="text-gray-300 mb-6">
+        All collected data is stored locally in JSON files on the host machine. This data is not transmitted to or stored by any third-party services.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">3. Data Retention</h2>
+      <p class="text-gray-300 mb-6">
+        Data associated with a server is automatically deleted when Onyx leaves that server or when the server’s Onyx process terminates. We do not retain personal or server data beyond what is necessary for operation.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">4. Data Sharing</h2>
+      <p class="text-gray-300 mb-6">
+        Onyx does <span class="font-semibold text-purple-300">not</span> share, sell, or disclose any collected information to third parties. Data remains accessible only to individuals who already have legitimate access to it (e.g., server owners and administrators within Discord).
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">5. User Rights and Data Removal</h2>
+      <p class="text-gray-300 mb-6">
+        Users or server owners may request clarification or removal of data by joining the official Onyx Support Server. Requests will be reviewed and fulfilled in accordance with Discord’s Terms of Service and data handling policies.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">6. Changes to This Policy</h2>
+      <p class="text-gray-300 mb-6">
+        We may update this Privacy Policy as needed to reflect changes to Onyx’s functionality or compliance requirements. The latest version will always be available on this page.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-purple-300 mb-2">7. Contact</h2>
+      <p class="text-gray-300">
+        For questions, concerns, or data removal requests, please join the official
+        <a href="YOUR_SUPPORT_SERVER_LINK" target="_blank" class="text-purple-400 hover:underline">Onyx Support Server</a>.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center bg-black/70 border-t border-gray-800">
+      <p class="text-gray-400">
+        © <span id="year"></span> Onyx. Built for safe communities.
+      </p>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
