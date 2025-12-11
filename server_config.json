@@ -1,0 +1,114 @@
+{
+    "1031653520904036454": {
+        "admin_role_id": 1162505287790506066,
+        "alert_channel_id": 1254228166851952762,
+        "allowed_ping_role_id": 1162505287790506066,
+        "blacklisted_domains": [],
+        "blacklisted_keywords": [],
+        "dangerous_perms": [
+            "administrator",
+            "ban_members",
+            "kick_members",
+            "manage_guild",
+            "manage_roles",
+            "manage_webhooks"
+        ],
+        "ban_threshold": 3,
+        "name": "The Spicy Duck Tavern",
+        "icon": "d6b1e99de326c3d83717ca66d4c208a8",
+        "owner_id": 291013221576474625
+    },
+    "1259877325567426632": {
+        "admin_role_id": 1404525212560523295,
+        "alert_channel_id": 1313997888669614180,
+        "allowed_ping_role_id": 1404525212560523295,
+        "blacklisted_domains": [],
+        "blacklisted_keywords": [],
+        "dangerous_perms": [
+            "administrator",
+            "ban_members",
+            "kick_members",
+            "manage_guild",
+            "manage_roles",
+            "manage_webhooks"
+        ],
+        "ban_threshold": 3,
+        "name": "Snowy's Sanctuary \ud83d\udc51\u2744 | Castle RP",
+        "icon": "9eacb354da6e31cd4896faf0c430e29e",
+        "owner_id": 430663794256248833
+    },
+    "976328748595019807": {
+        "admin_role_id": 976504944620359690,
+        "alert_channel_id": 1083864794999832637,
+        "allowed_ping_role_id": 976504944620359690,
+        "blacklisted_domains": [],
+        "blacklisted_keywords": [],
+        "dangerous_perms": [
+            "ban_members",
+            "manage_roles",
+            "manage_guild",
+            "manage_webhooks",
+            "manage_messages",
+            "kick_members",
+            "administrator"
+        ],
+        "ban_threshold": 3,
+        "name": "Nightborn's Coven",
+        "icon": "02f4a2b01455bd913a6c9bb94c7e216b",
+        "owner_id": 926414788811161620,
+        "captcha_channel_id": 1411488097929007154,
+        "captcha_verified_role_id": 1017997179010424954
+    },
+    "1384343324378267649": {
+        "alert_channel_id": 1384349372074037379,
+        "admin_role_id": 1384586538876276826,
+        "allowed_ping_role_id": 1384586538876276826,
+        "blacklisted_domains": [],
+        "blacklisted_keywords": [],
+        "dangerous_perms": [
+            "ban_members",
+            "manage_roles",
+            "manage_guild",
+            "manage_webhooks",
+            "manage_messages",
+            "kick_members",
+            "administrator"
+        ],
+        "ban_threshold": 3,
+        "name": "The Cursed Realm",
+        "icon": "6b34ffcf675e00018aa85d76f31a5623",
+        "owner_id": 1145897809745289326
+    },
+    "1092312985906708482": {
+        "alert_channel_id": 1295284391337132052,
+        "admin_role_id": 1266902889259864085,
+        "blacklisted_domains": [],
+        "blacklisted_keywords": [],
+        "dangerous_perms": [
+            "ban_members",
+            "manage_roles",
+            "manage_guild",
+            "manage_webhooks",
+            "manage_messages",
+            "kick_members",
+            "administrator"
+        ],
+        "ban_threshold": 3,
+        "name": "Grapes Fridge",
+        "icon": "9a1ce55cc872f4111ef2daafbf06a9e3",
+        "owner_id": 103928865113509888
+    },
+    "333949691962195969": {
+        "admin_role_id": 333949691962195969
+    },
+    "1235429763129016361": {
+        "name": "Onyx Support",
+        "icon": "a1c2f8c5e2fe5f07e7fa70cebe32c77e",
+        "owner_id": 1227388850574200974
+    },
+    "1358184477993599276": {
+        "name": "Bot Logs",
+        "icon": "cf9636a97e74c7e305ead933df84772e",
+        "owner_id": 1227388850574200974
+    }
+}

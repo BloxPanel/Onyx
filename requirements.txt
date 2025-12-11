@@ -1,0 +1,23 @@
+# Discord library (Pycord)
+py-cord>=2.6.1
+
+# Async HTTP requests
+aiohttp>=3.8.4
+
+# Extract domains from URLs
+tldextract>=3.4.1
+
+# Load environment variables from .env
+python-dotenv>=1.0.0
+
+flask
+
+oletools
+
+gunicorn
+
+# Optional, for JSON handling (built-in, but just to be safe)
+# json is built-in, no install required
+
+# For typing / contextlib / other standard modules, no install required
+
